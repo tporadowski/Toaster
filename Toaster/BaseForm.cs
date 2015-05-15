@@ -12,7 +12,7 @@ namespace Toaster
 		internal DateTime DateShown = DateTime.Now;
 		private String iconUrl = "";
 
-		public String IconUrl
+		public String ToastIconUrl
 		{
 			get { return this.iconUrl; }
 			set
@@ -22,6 +22,17 @@ namespace Toaster
 				{
 					System.Net.WebRequest request = System.Net.WebRequest.Create(this.iconUrl);
 					using (System.Net.WebResponse response = request.GetResponse()) { this.NotificationIcon = new Bitmap(response.GetResponseStream()); }
+				}
+			}
+		}
+
+		public Icon ToastIcon
+		{
+			set
+			{
+				if (value != null)
+				{
+					NotificationIcon = value.ToBitmap();
 				}
 			}
 		}

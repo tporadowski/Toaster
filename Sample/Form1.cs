@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sample.Properties;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,7 +17,9 @@ namespace Sample
 			for (var i = 0; i <= 4; i++)
 			{
 				var notification = Toaster.Toast.ShowNotification("New message from slackbot " + i,
-					"Hey, you asked me to remind you to contact payroll regarding invoice changes.\nwhat if we had some more text here? what to do then?", "https://slack.global.ssl.fastly.net/20655/img/slack_growl_icon.png", "Tag_123456789", 15000);
+					"Hey, you asked me to remind you to contact payroll regarding invoice changes.\nwhat if we had some more text here? what to do then?",
+					i % 2 == 0 ? "https://slack.global.ssl.fastly.net/20655/img/slack_growl_icon.png" : null, "Tag_123456789", 15000,
+					i % 2 == 1 ? Resources.TestResourceIcon : null);
 				notification.FormClosed += delegate { System.Diagnostics.Debug.WriteLine(notification.Dismissed ? notification.Tag + " was dismissed." : notification.Tag + " was not dismissed."); };
 				notification.FormClosed += delegate { if (Toaster.Toast.ActiveToasts.Count == 0) this.Close(); };
 			}
